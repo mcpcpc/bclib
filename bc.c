@@ -1,4 +1,5 @@
 #include <unistd.h>
+#include <stdlib.h>
 #define DATA_OFFSET_OFFSET 0x000A
 #define WIDTH_OFFSET 0x0012
 #define HEIGHT_OFFSET 0x0016
@@ -14,7 +15,7 @@ unsigned char byte;
 short int16;
 
  
-void ReadImage(const char *fileName,byte **pixels, int32 *width, int32 *height, int32 *bytesPerPixel) {
+void bitmapRead(char *fileName,byte **pixels, int32 *width, int32 *height, int32 *bytesPerPixel) {
         FILE *imageFile = fopen(fileName, "rb");
         int32 dataOffset;
         fseek(imageFile, DATA_OFFSET_OFFSET, SEEK_SET);
@@ -44,11 +45,11 @@ void ReadImage(const char *fileName,byte **pixels, int32 *width, int32 *height, 
         fclose(imageFile);
 }
  
-void WriteImage(const char *fileName, byte *pixels, int32 width, int32 height,int32 bytesPerPixel)
+void bitmapWrite(char *fileName, byte *pixels, int32 width, int32 height,int32 bytesPerPixel)
 {
         FILE *outputFile = fopen(fileName, "wb");
         //*****HEADER************//
-        const char *BM = "BM";
+        char *BM = "BM";
         fwrite(&BM[0], 1, 1, outputFile);
         fwrite(&BM[1], 1, 1, outputFile);
         int paddedRowSize = (int)(4 * ceil((float)width/4.0f))*bytesPerPixel;
@@ -97,8 +98,8 @@ int main() {
         int32 width;
         int32 height;
         int32 bytesPerPixel;
-        ReadImage("img.bmp", &pixels, &width, &height,&bytesPerPixel);
-        WriteImage("img2.bmp", pixels, width, height, bytesPerPixel);
+        bitmapRead("img.bmp", &pixels, &width, &height,&bytesPerPixel);
+        bitmapWrite("img2.bmp", pixels, width, height, bytesPerPixel);
         free(pixels);
         return 0;
 }
