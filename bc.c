@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
 #define DATA_OFFSET_OFFSET 0x000A
 #define WIDTH_OFFSET 0x0012
@@ -30,7 +31,6 @@ void bitmapRead(char *fileName,byte **pixels, int32 *width, int32 *height, int32
         fseek(imageFile, BITS_PER_PIXEL_OFFSET, SEEK_SET);
         fread(&bitsPerPixel, 2, 1, imageFile);
         *bytesPerPixel = ((int32)bitsPerPixel) / 8;
- 
         int paddedRowSize = (int)(4 * ceil((float)(*width) / 4.0f))*(*bytesPerPixel);
         int unpaddedRowSize = (*width)*(*bytesPerPixel);
         int totalSize = unpaddedRowSize*(*height);
@@ -74,7 +74,7 @@ void bitmapWrite(char *fileName, byte *pixels, int32 width, int32 height,int32 b
         //write compression
         int32 compression = NO_COMPRESION;
         fwrite(&compression, 4, 1, outputFile);
-        write image size (in bytes)
+        //write image size (in bytes)
         int32 imageSize = width*height*bytesPerPixel;
         fwrite(&imageSize, 4, 1, outputFile);
         int32 resolutionX = 11811; //300 dpi
