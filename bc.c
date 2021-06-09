@@ -100,6 +100,5 @@ int main() {
         int32 bytesPerPixel;
         bitmapRead("img.bmp", &pixels, &width, &height,&bytesPerPixel);
         bitmapWrite("img2.bmp", pixels, width, height, bytesPerPixel);
-        free(pixels);
         return 0;
 }
