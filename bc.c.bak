@@ -17,14 +17,8 @@ typedef unsigned int int32;
 typedef unsigned char byte;
 typedef short int16;
 
-struct Bitmap {
-        byte *pixels;
-        int32 width;
-        int32 height;
-        int32 bytesPerPixel;
-}
  
-void bitmapRead(char *fileName, struct Bitmap bmp) {
+void bitmapRead(char *fileName,byte **pixels, int32 *width, int32 *height, int32 *bytesPerPixel) {
         FILE *imageFile = fopen(fileName, "rb");
         int32 dataOffset;
         fseek(imageFile, DATA_OFFSET_OFFSET, SEEK_SET);
@@ -52,7 +46,8 @@ void bitmapRead(char *fileName, struct Bitmap bmp) {
         fclose(imageFile);
 }
  
-void bitmapWrite(char *fileName, struct Bitmap bmp) {
+void bitmapWrite(char *fileName, byte *pixels, int32 width, int32 height,int32 bytesPerPixel)
+{
         FILE *outputFile = fopen(fileName, "wb");
         //*****HEADER************//
         char *BM = "BM";
@@ -99,10 +94,11 @@ void bitmapWrite(char *fileName, struct Bitmap bmp) {
 }
  
 int main() {
-        struct Bitmap bmp;
-        str *in = "img.bmp"
-        str *out = "img2.bmp"
-        bitmapRead(in, bmp);
-        bitmapWrite(out, bmp);
+        byte *pixels;
+        int32 width;
+        int32 height;
+        int32 bytesPerPixel;
+        bitmapRead("img.bmp", &pixels, &width, &height,&bytesPerPixel);
+        bitmapWrite("img2.bmp", pixels, width, height, bytesPerPixel);
         return 0;
 }
