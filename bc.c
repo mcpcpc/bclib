@@ -10,9 +10,9 @@
 #define MAX_NUMBER_OF_COLORS 0
 #define ALL_COLORS_REQUIRED 0
  
-unsigned int int32;
-unsigned char byte;
-short int16;
+typedef unsigned int int32;
+typedef unsigned char byte;
+typedef short int16;
 
  
 void bitmapRead(char *fileName,byte **pixels, int32 *width, int32 *height, int32 *bytesPerPixel) {
