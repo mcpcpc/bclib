@@ -37,8 +37,7 @@ void bitmapRead(char *fileName,byte **pixels, int32 *width, int32 *height, int32
         *pixels = (byte*)malloc(totalSize);
         int i = 0;
         byte *currentRowPointer = *pixels+((*height-1)*unpaddedRowSize);
-        for (i = 0; i < *height; i++)
-        {
+        unsigned for (i = 0; i < *height; i++) {
                 fseek(imageFile, dataOffset+(i*paddedRowSize), SEEK_SET);
             fread(currentRowPointer, 1, unpaddedRowSize, imageFile);
             currentRowPointer -= unpaddedRowSize;
@@ -85,10 +84,9 @@ void bitmapWrite(char *fileName, byte *pixels, int32 width, int32 height,int32 b
         fwrite(&colorsUsed, 4, 1, outputFile);
         int32 importantColors = ALL_COLORS_REQUIRED;
         fwrite(&importantColors, 4, 1, outputFile);
-        int i = 0;
+        unsigned int i = 0;
         int unpaddedRowSize = width*bytesPerPixel;
-        for ( i = 0; i < height; i++)
-        {
+        for ( i = 0; i < height; i++) {
                 int pixelOffset = ((height - i) - 1)*unpaddedRowSize;
                 fwrite(&pixels[pixelOffset], 1, paddedRowSize, outputFile); 
         }
