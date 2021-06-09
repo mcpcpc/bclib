@@ -1,5 +1,7 @@
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
+
 #define DATA_OFFSET_OFFSET 0x000A
 #define WIDTH_OFFSET 0x0012
 #define HEIGHT_OFFSET 0x0016
