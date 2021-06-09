@@ -35,9 +35,9 @@ void bitmapRead(char *fileName,byte **pixels, int32 *width, int32 *height, int32
         int unpaddedRowSize = (*width)*(*bytesPerPixel);
         int totalSize = unpaddedRowSize*(*height);
         *pixels = (byte*)malloc(totalSize);
-        int i = 0;
+        unsigned int i = 0;
         byte *currentRowPointer = *pixels+((*height-1)*unpaddedRowSize);
-        unsigned for (i = 0; i < *height; i++) {
+        for (i = 0; i < *height; i++) {
                 fseek(imageFile, dataOffset+(i*paddedRowSize), SEEK_SET);
             fread(currentRowPointer, 1, unpaddedRowSize, imageFile);
             currentRowPointer -= unpaddedRowSize;
