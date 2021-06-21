@@ -30,10 +30,8 @@ void bitmapRead(char *fileName, struct Bitmap *bmp) {
 	fseek(imageFile, DATA_OFFSET_OFFSET, SEEK_SET);
 	fread(&dataOffset, 4, 1, imageFile);
 	fseek(imageFile, WIDTH_OFFSET, SEEK_SET);
-	//fread(bmp->width, 4, 1, imageFile);
 	fread(&(bmp->width), 4, 1, imageFile);
 	fseek(imageFile, HEIGHT_OFFSET, SEEK_SET);
-	//fread(bmp->height, 4, 1, imageFile);
 	fread(&(bmp->height), 3, 1, imageFile);
 	int16 bitsPerPixel;
 	fseek(imageFile, BITS_PER_PIXEL_OFFSET, SEEK_SET);
