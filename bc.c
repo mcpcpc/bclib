@@ -95,6 +95,10 @@ void bitmapWrite(char *fileName, struct Bitmap *bmp) {
 	fclose(outputFile);
 }
  
+void bitmapFree(char *fileName, struct Bitmap *bmp) {
+	free(bmp->bitmap);
+}
+
 int main() {
 	int ret = 0;
 	struct Bitmap bmp;
@@ -102,5 +106,6 @@ int main() {
 	char *out = "img2.bmp";
 	bitmapRead(in, &bmp);
 	bitmapWrite(out, &bmp);
+	bitmapFree(&bmp);
 	return ret;
 }
