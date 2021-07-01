@@ -1,7 +1,5 @@
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <math.h>
+#ifndef __BC_H
+#define __BC_H
 
 #define DATA_OFFSET_OFFSET 0x000A
 #define WIDTH_OFFSET 0x0012
@@ -27,3 +25,4 @@ struct Bitmap {
 void bitmapRead(char *fileName, struct Bitmap *bmp);
 void bitmapWrite(char *fileName, struct Bitmap *bmp);
 void bitmapFree(struct Bitmap *bmp);
+#endif
