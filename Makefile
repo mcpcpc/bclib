@@ -13,7 +13,7 @@ install: all
 	chmod 755 $(DESTDIR)$(BINDIR)/bc
 bc: bc.o
 	$(CC) $(ALL_LDFLAGS) -o bc bc.o $(LDLIBS)
-bc.o: bc.c
+bc.o: bc.c bc.h
 	$(CC) $(ALL_CFLAGS) -c bc.c
 clean:
 	rm -f bc *.o
